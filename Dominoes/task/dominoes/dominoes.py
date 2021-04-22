@@ -36,9 +36,7 @@ class Dominoes:
 
         # If starting piece can't be determined, reshuffle and redistribute tiles
         while not start_player:
-            print("next loop")
             self.distribute_dominoes()
-            print(self.computer)
             snake, start_player = self.find_starter()
 
         print(f"Stock pieces: {self.stock}")
