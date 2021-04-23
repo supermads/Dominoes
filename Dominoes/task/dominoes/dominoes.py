@@ -12,21 +12,20 @@ class Dominoes:
     def distribute_dominoes(self):
         # Shuffle tiles and distribute 7 pieces each to computer and player
         shuffle(self.tiles)
-        self.computer = [self.tiles[i] for i in range(7)]
-        self.player = [self.tiles[i] for i in range(7, 14)]
-        self.stock = [self.tiles[i] for i in range(14, 28)]
+        self.computer = self.tiles[:7]
+        self.player = self.tiles[7:14]
+        self.stock = self.tiles[14:]
 
     def find_starter(self):
         snakes = [[6,6], [5,5], [4,4], [3,3], [2,2], [1,1], [0,0]]
 
-        for i in range(7):
-            curr_snake = snakes[i]
-            if curr_snake in self.computer:
-                self.computer.remove(curr_snake)
-                return curr_snake, "player"
-            elif curr_snake in self.player:
-                self.player.remove(curr_snake)
-                return curr_snake, "computer"
+        for snake in snakes:
+            if snake in self.computer:
+                self.computer.remove(snake)
+                return snake, "player"
+            elif snake in self.player:
+                self.player.remove(snake)
+                return snake, "computer"
 
         return None, None
 
@@ -39,11 +38,19 @@ class Dominoes:
             self.distribute_dominoes()
             snake, start_player = self.find_starter()
 
-        print(f"Stock pieces: {self.stock}")
-        print(f"Computer pieces: {self.computer}")
-        print(f"Player pieces: {self.player}")
-        print(f"Domino snake: {[snake]}")
-        print(f"Status: {start_player}")
+        print("=" * 70)
+        print(f"Stock size: {len(self.stock)}")
+        print(f"Computer pieces: {len(self.computer)}\n")
+        print(snake)
+
+        print("\nYour pieces:")
+        for i, tile in enumerate(self.player):
+            print(f"{i + 1}:{tile}")
+
+        if start_player == "computer":
+            print("\nStatus: Computer is about to make a move. Press Enter to continue...")
+        else:
+            print("\nStatus: It's your turn to make a move. Enter your command.")
 
 
 Dominoes().main()
