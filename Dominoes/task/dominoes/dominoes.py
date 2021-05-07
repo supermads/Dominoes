@@ -27,6 +27,7 @@ class Dominoes:
                 self.computer.remove(start_tile)
                 self.curr_player = "player"
                 return start_tile
+
             elif start_tile in self.player:
                 self.player.remove(start_tile)
                 self.curr_player = "computer"
@@ -65,9 +66,33 @@ class Dominoes:
         else:
             print("\nStatus: It's your turn to make a move. Enter your command.")
 
+    def find_moves(self):
+        # Returns the indices of tiles in the current player's supply that can be legally played this turn
+        moves = []
+        left_end = self.snake[0][0]
+        right_end = self.snake[-1][1]
+
+        if self.curr_player == "player":
+            for i, tile in enumerate(self.player):
+                if left_end in tile:
+                    moves.append((i + 1) * -1)
+                if right_end in tile:
+                    moves.append(i + 1)
+
+        else:
+            for i, tile in enumerate(self.computer):
+                # The player's list of pieces starts with one, so add one to the tile index before appending it to moves list
+                if left_end in tile:
+                    # If the tile can be played on the left side of the snake, make tile number negative
+                    moves.append((i + 1) * -1)
+                if right_end in tile:
+                    moves.append(i + 1)
+
+        return moves
+
     def player_turn(self):
         action = ""
-        move_made = False
+        possible_moves = self.find_moves()
 
         while action == "":
             try:
@@ -75,67 +100,71 @@ class Dominoes:
             except ValueError:
                 print("Invalid input. Please try again.")
 
-        if action == 0:
-            # If the user inputs 0, remove a random tile from the stock and add it to their supply
-            curr_tile = randint(0, len(self.stock) - 1)
-            self.player.append(self.stock.pop(curr_tile))
-            move_made = True
-
-        while not move_made:
-            if action < 0:
-                try:
-                    # If the user inputs a negative number, make it positive
-                    # Add the corresponding tile from the player's supply to the left side of the snake
-                    action = abs(action)
-                    curr_tile = self.player.pop(action - 1)
-                    self.snake.insert(0, curr_tile)
-                    move_made = True
-
-                    if curr_tile[1] == self.snake[1][0]:
-                        self.matching_ends += 1
-                    
-                except IndexError:
-                    print("Invalid input. Please try again.")
-                    action = int(input())
-                    
+        while action not in possible_moves and action != 0:
+            if abs(action) > len(self.player):
+                print("Invalid input. Please try again.")
             else:
-                # If action is positive and within range of available tiles, add corresponding tile to the right side of the snake
-                try:
-                    curr_tile = self.player.pop(action - 1)
-                    self.snake.append(curr_tile)
-                    move_made = True
+                print("Illegal move. Please try again")
+            action = int(input())
 
-                    if curr_tile[0] == self.snake[-2][1]:
-                        self.matching_ends += 1
+        if action < 0:
+            action = abs(action)
+            curr_tile = self.player.pop(action - 1)
 
-                except IndexError:
-                    print("Invalid input. Please try again.")
-                    action = int(input())
+            if curr_tile[1] == self.snake[0][0]:
+                self.snake.insert(0, curr_tile)
+
+            else:
+                self.snake.insert(0, curr_tile[::-1])
+
+        elif action > 0:
+            curr_tile = self.player.pop(action - 1)
+
+            if curr_tile[0] == self.snake[-1][1]:
+                self.snake.append(curr_tile)
+
+            else:
+                self.snake.append(curr_tile[::-1])
+
+        else:
+            # If the user inputs 0, remove a random tile from the stock and add it to their supply (if stock isn't empty)
+            if self.stock:
+                curr_tile = randint(0, len(self.stock) - 1)
+                self.player.append(self.stock.pop(curr_tile))
 
         self.curr_player = "computer"
 
     def computer_turn(self):
         input()
 
-        supply_size = len(self.computer)
-        action = randint(-supply_size, supply_size)
+        possible_moves = self.find_moves()
 
-        if action < 0:
-            action = abs(action)
+        if possible_moves:
+            action = possible_moves[randint(0, len(possible_moves) - 1)]
 
-            # Subtract 1 from action because supply_size is 1 larger than the max index of the supply
-            curr_tile = self.computer.pop(action - 1)
-            self.snake.append(curr_tile)
+            if action < 0:
+                action = abs(action)
+                curr_tile = self.computer.pop(action - 1)
 
-            if curr_tile[1] == self.snake[1][0]:
-                self.matching_ends += 1
+                if curr_tile[1] == self.snake[0][0]:
+                    self.snake.insert(0, curr_tile)
+
+                else:
+                    self.snake.insert(0, curr_tile[::-1])
+
+            elif action > 0:
+                curr_tile = self.computer.pop(action - 1)
+
+                if curr_tile[0] == self.snake[-1][1]:
+                    self.snake.append(curr_tile)
+
+                else:
+                    self.snake.append(curr_tile[::-1])
 
         else:
-            curr_tile = self.computer.pop(action - 1)
-            self.snake.append(curr_tile)
-
-            if curr_tile[0] == self.snake[-2][1]:
-                self.matching_ends += 1
+            if self.stock:
+                curr_tile = randint(0, len(self.stock) - 1)
+                self.computer.append(self.stock.pop(curr_tile))
 
         self.curr_player = "player"
 

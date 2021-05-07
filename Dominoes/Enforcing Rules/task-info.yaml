@@ -304,9 +304,14 @@ files:
 
         def check_the_win(self, reply: list, attach: Any) -> CheckResult:
             design = '=' * 70
+            if not reply:
+                raise WrongAnswerException("The reply is empty. Please, output the required data.")
             reply_parsed = reply.split(design)
             the_last = [i.strip() for i in reply_parsed[-1].strip().split('\n') if i]
-            comp_pieces = int([i.strip() for i in the_last[1].split(':') if i][-1])
+            try:
+                comp_pieces = int([i.strip() for i in the_last[1].split(':') if i][-1])
+            except IndexError:
+                raise WrongAnswerException("Make sure you output pieces in the required format.")
             # check for the win
             if '1:[' not in reply_parsed[-1]:
                 if ':[' in reply_parsed[-1] or comp_pieces == 0:
@@ -329,5 +334,8 @@ files:
         TestStage4('dominoes.dominoes').run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/projects/146/stages/789/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Fri, 07 May 2021 22:11:42 UTC
 record: -1
