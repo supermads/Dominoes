@@ -332,5 +332,173 @@ files:
         TestStage5('dominoes.dominoes').run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/projects/146/stages/790/implement#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: "Error in test #1\n\nProgram ran out of input. You tried to read more than\
+    \ expected.\n\nPlease find below the output of your program during this failed\
+    \ test.\nNote that the '>' character indicates the beginning of the input line.\n\
+    \n---\n\n======================================================================\n\
+    Stock size: 14\nComputer pieces: 6\n\n[6, 6]\n\nYour pieces:\n1:[2, 6]\n2:[4,\
+    \ 4]\n3:[0, 4]\n4:[2, 2]\n5:[0, 0]\n6:[3, 5]\n7:[3, 6]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 1\n======================================================================\n\
+    Stock size: 14\nComputer pieces: 6\n\n[6, 6] [6, 2]\n\nYour pieces:\n1:[4, 4]\n\
+    2:[0, 4]\n3:[2, 2]\n4:[0, 0]\n5:[3, 5]\n6:[3, 6]\n\nStatus: Computer is about\
+    \ to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 14\nComputer pieces: 5\n\n[4, 6] [6, 6] [6, 2]\n\nYour pieces:\n1:[4,\
+    \ 4]\n2:[0, 4]\n3:[2, 2]\n4:[0, 0]\n5:[3, 5]\n6:[3, 6]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 4\nIllegal move. Please try again\n>\
+    \ -1\n======================================================================\n\
+    Stock size: 14\nComputer pieces: 5\n\n[4, 4] [4, 6] [6, 6] [6, 2]\n\nYour pieces:\n\
+    1:[0, 4]\n2:[2, 2]\n3:[0, 0]\n4:[3, 5]\n5:[3, 6]\n\nStatus: Computer is about\
+    \ to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 14\nComputer pieces: 4\n\n[5, 4] [4, 4] [4, 6] [6, 6] [6, 2]\n\nYour\
+    \ pieces:\n1:[0, 4]\n2:[2, 2]\n3:[0, 0]\n4:[3, 5]\n5:[3, 6]\n\nStatus: It's your\
+    \ turn to make a move. Enter your command.\n> -25\nInvalid input. Please try again.\n\
+    > 2\n======================================================================\n\
+    Stock size: 14\nComputer pieces: 4\n\n[5, 4] [4, 4] [4, 6] [6, 6] [6, 2] [2, 2]\n\
+    \nYour pieces:\n1:[0, 4]\n2:[0, 0]\n3:[3, 5]\n4:[3, 6]\n\nStatus: Computer is\
+    \ about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 14\nComputer pieces: 3\n\n[5, 4][4, 4][4, 6]...[6, 2][2, 2][2, 0]\n\
+    \nYour pieces:\n1:[0, 4]\n2:[0, 0]\n3:[3, 5]\n4:[3, 6]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 1\n======================================================================\n\
+    Stock size: 14\nComputer pieces: 3\n\n[5, 4][4, 4][4, 6]...[2, 2][2, 0][0, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n\nStatus: Computer is about to make\
+    \ a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 14\nComputer pieces: 2\n\n[2, 5][5, 4][4, 4]...[2, 2][2, 0][0, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n\nStatus: It's your turn to make\
+    \ a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 13\nComputer pieces: 2\n\n[2, 5][5, 4][4, 4]...[2, 2][2, 0][0, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[2, 4]\n\nStatus: Computer is\
+    \ about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 12\nComputer pieces: 3\n\n[2, 5][5, 4][4, 4]...[2, 2][2, 0][0, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[2, 4]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 4\n======================================================================\n\
+    Stock size: 12\nComputer pieces: 3\n\n[2, 5][5, 4][4, 4]...[2, 0][0, 4][4, 2]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n\nStatus: Computer is about to make\
+    \ a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 11\nComputer pieces: 4\n\n[2, 5][5, 4][4, 4]...[2, 0][0, 4][4, 2]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n\nStatus: It's your turn to make\
+    \ a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 10\nComputer pieces: 4\n\n[2, 5][5, 4][4, 4]...[2, 0][0, 4][4, 2]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[1, 2]\n\nStatus: Computer is\
+    \ about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 9\nComputer pieces: 5\n\n[2, 5][5, 4][4, 4]...[2, 0][0, 4][4, 2]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[1, 2]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 4\n======================================================================\n\
+    Stock size: 9\nComputer pieces: 5\n\n[2, 5][5, 4][4, 4]...[0, 4][4, 2][2, 1]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n\nStatus: Computer is about to make\
+    \ a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 9\nComputer pieces: 4\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n\nStatus: It's your turn to make\
+    \ a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 8\nComputer pieces: 4\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n\nStatus: Computer is\
+    \ about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 7\nComputer pieces: 5\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 6\nComputer pieces: 5\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n5:[5, 6]\n\nStatus: Computer\
+    \ is about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 5\nComputer pieces: 6\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n5:[5, 6]\n\nStatus: It's\
+    \ your turn to make a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 4\nComputer pieces: 6\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n5:[5, 6]\n6:[1, 5]\n\n\
+    Status: Computer is about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 3\nComputer pieces: 7\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n5:[5, 6]\n6:[1, 5]\n\n\
+    Status: It's your turn to make a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 2\nComputer pieces: 7\n\n[2, 5][5, 4][4, 4]...[4, 2][2, 1][1, 4]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n5:[5, 6]\n6:[1, 5]\n7:[5,\
+    \ 5]\n\nStatus: Computer is about to make a move. Press Enter to continue...\n\
+    > \n======================================================================\nStock\
+    \ size: 2\nComputer pieces: 6\n\n[2, 5][5, 4][4, 4]...[2, 1][1, 4][4, 3]\n\nYour\
+    \ pieces:\n1:[0, 0]\n2:[3, 5]\n3:[3, 6]\n4:[3, 3]\n5:[5, 6]\n6:[1, 5]\n7:[5, 5]\n\
+    \nStatus: It's your turn to make a move. Enter your command.\n> 2\n======================================================================\n\
+    Stock size: 2\nComputer pieces: 6\n\n[2, 5][5, 4][4, 4]...[1, 4][4, 3][3, 5]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 6]\n3:[3, 3]\n4:[5, 6]\n5:[1, 5]\n6:[5, 5]\n\n\
+    Status: Computer is about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 2\nComputer pieces: 6\n\n[2, 5][5, 4][4, 4]...[1, 4][4, 3][3, 5]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 6]\n3:[3, 3]\n4:[5, 6]\n5:[1, 5]\n6:[5, 5]\n\n\
+    Status: It's your turn to make a move. Enter your command.\n> 4\n======================================================================\n\
+    Stock size: 2\nComputer pieces: 6\n\n[2, 5][5, 4][4, 4]...[4, 3][3, 5][5, 6]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 6]\n3:[3, 3]\n4:[1, 5]\n5:[5, 5]\n\nStatus: Computer\
+    \ is about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 2\nComputer pieces: 5\n\n[2, 5][5, 4][4, 4]...[3, 5][5, 6][6, 1]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 6]\n3:[3, 3]\n4:[1, 5]\n5:[5, 5]\n\nStatus: It's\
+    \ your turn to make a move. Enter your command.\n> 4\n======================================================================\n\
+    Stock size: 2\nComputer pieces: 5\n\n[2, 5][5, 4][4, 4]...[5, 6][6, 1][1, 5]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 6]\n3:[3, 3]\n4:[5, 5]\n\nStatus: Computer is\
+    \ about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 2\nComputer pieces: 4\n\n[2, 5][5, 4][4, 4]...[6, 1][1, 5][5, 0]\n\
+    \nYour pieces:\n1:[0, 0]\n2:[3, 6]\n3:[3, 3]\n4:[5, 5]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 1\n======================================================================\n\
+    Stock size: 2\nComputer pieces: 4\n\n[2, 5][5, 4][4, 4]...[1, 5][5, 0][0, 0]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n\nStatus: Computer is about to make\
+    \ a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 2\nComputer pieces: 3\n\n[2, 5][5, 4][4, 4]...[5, 0][0, 0][0, 1]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n\nStatus: It's your turn to make\
+    \ a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 1\nComputer pieces: 3\n\n[2, 5][5, 4][4, 4]...[5, 0][0, 0][0, 1]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n4:[0, 3]\n\nStatus: Computer is\
+    \ about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 1\nComputer pieces: 2\n\n[2, 5][5, 4][4, 4]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n4:[0, 3]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> 0\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 2\n\n[2, 5][5, 4][4, 4]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n4:[0, 3]\n5:[2, 3]\n\nStatus: Computer\
+    \ is about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 2\n\n[2, 5][5, 4][4, 4]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n4:[0, 3]\n5:[2, 3]\n\nStatus: It's\
+    \ your turn to make a move. Enter your command.\n> -5\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 2\n\n[3, 2][2, 5][5, 4]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n4:[0, 3]\n\nStatus: Computer is\
+    \ about to make a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 2\n\n[3, 2][2, 5][5, 4]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 6]\n2:[3, 3]\n3:[5, 5]\n4:[0, 3]\n\nStatus: It's your turn\
+    \ to make a move. Enter your command.\n> -1\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 2\n\n[6, 3][3, 2][2, 5]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 3]\n2:[5, 5]\n3:[0, 3]\n\nStatus: Computer is about to make\
+    \ a move. Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[0, 6][6, 3][3, 2]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 3]\n2:[5, 5]\n3:[0, 3]\n\nStatus: It's your turn to make\
+    \ a move. Enter your command.\n> -3\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 0][0, 6][6, 3]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 3]\n2:[5, 5]\n\nStatus: Computer is about to make a move.\
+    \ Press Enter to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 0][0, 6][6, 3]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[3, 3]\n2:[5, 5]\n\nStatus: It's your turn to make a move. Enter\
+    \ your command.\n> -1\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: Computer is about to make a move. Press Enter\
+    \ to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: It's your turn to make a move. Enter your\
+    \ command.\n> 0\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: Computer is about to make a move. Press Enter\
+    \ to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: It's your turn to make a move. Enter your\
+    \ command.\n> 0\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: Computer is about to make a move. Press Enter\
+    \ to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: It's your turn to make a move. Enter your\
+    \ command.\n> 0\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: Computer is about to make a move. Press Enter\
+    \ to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: It's your turn to make a move. Enter your\
+    \ command.\n> 0\n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: Computer is about to make a move. Press Enter\
+    \ to continue...\n> \n======================================================================\n\
+    Stock size: 0\nComputer pieces: 1\n\n[3, 3][3, 0][0, 6]...[0, 0][0, 1][1, 1]\n\
+    \nYour pieces:\n1:[5, 5]\n\nStatus: It's your turn to make a move. Enter your\
+    \ command."
+  time: Mon, 10 May 2021 23:48:26 UTC
 record: -1

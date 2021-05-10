@@ -6,7 +6,7 @@ from hstest.exceptions import WrongAnswerException
 import ast
 
 
-class TestStage4(StageTest):
+class TestStage5(StageTest):
 
     def generate(self) -> List[TestCase]:
         list_of_funcs = [self.func1, self.func2, self.func3, self.func4, self.func5,
@@ -45,7 +45,7 @@ class TestStage4(StageTest):
         output_parsed = self.parse_the_output(output)
         try:
             len_comp_pieces = int([i.strip() for i in output_parsed[2].split(':')][-1])
-        except (ValueError, SyntaxError):
+        except ValueError:
             raise WrongAnswerException("Make sure your output is formatted according to the examples")
         return len_comp_pieces
 
@@ -88,15 +88,13 @@ class TestStage4(StageTest):
 
     def get_the_ends(self, output):
         """Get the ends of the domino snake"""
+
         try:
             domino_snake = self.parse_the_output(output)[3]
             self.left_end = ast.literal_eval(domino_snake[:6])
             self.right_end = ast.literal_eval(domino_snake[-6:])
-        except IndexError:
-            raise WrongAnswerException("Some elements are missing")
-        except (ValueError, SyntaxError):
-            raise WrongAnswerException("An error occurred while processing your output.\n"
-                                       "Please make sure that your program's output is formatted exactly as described.")
+        except (SyntaxError, ValueError, IndexError):
+            raise WrongAnswerException("Make sure your output is formatted according to the examples")
 
     def choose_the_piece(self, output):
         """Choose the piece for the player to pick"""
@@ -292,7 +290,7 @@ class TestStage4(StageTest):
         self.set_the_currents(output)
         return self.check_the_move(output)
 
-    def check_the_win(self, reply: list, attach: Any) -> CheckResult:
+    def check_the_win(self, reply: str, attach: Any) -> CheckResult:
         design = '=' * 70
         if not reply:
             raise WrongAnswerException("The reply is empty. Please, output the required data.")
@@ -321,4 +319,4 @@ class TestStage4(StageTest):
 
 
 if __name__ == '__main__':
-    TestStage4('dominoes.dominoes').run_tests()
+    TestStage5('dominoes.dominoes').run_tests()

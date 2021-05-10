@@ -1,5 +1,6 @@
 from itertools import combinations_with_replacement
 from random import shuffle, randint
+from collections import Counter
 
 
 class Dominoes:
@@ -10,7 +11,7 @@ class Dominoes:
         self.stock = []
         self.snake = []
         self.curr_player = ""
-        self.matching_ends = 0
+        self.freq_dict = Counter({i: 0 for i in range(7)})
 
     def distribute_dominoes(self):
         # Shuffle tiles and distribute 7 pieces each to computer and player
@@ -26,11 +27,13 @@ class Dominoes:
             if start_tile in self.computer:
                 self.computer.remove(start_tile)
                 self.curr_player = "player"
+                self.freq_dict[start_tile[0]] = self.freq_dict[start_tile[0]] + 2
                 return start_tile
 
             elif start_tile in self.player:
                 self.player.remove(start_tile)
                 self.curr_player = "computer"
+                self.freq_dict[start_tile[0]] = self.freq_dict[start_tile[0]] + 2
                 return start_tile
 
         return None, None
@@ -52,7 +55,7 @@ class Dominoes:
         print(f"Stock size: {len(self.stock)}")
         print(f"Computer pieces: {len(self.computer)}\n")
 
-        if len(self.snake) > 4:
+        if len(self.snake) > 6:
             print(f"{self.snake[0]}{self.snake[1]}{self.snake[2]}...{self.snake[-3]}{self.snake[-2]}{self.snake[-1]}")
         else:
             print(*self.snake)
@@ -60,11 +63,6 @@ class Dominoes:
         print("\nYour pieces:")
         for i, tile in enumerate(self.player):
             print(f"{i + 1}:{tile}")
-
-        if self.curr_player == "computer":
-            print("\nStatus: Computer is about to make a move. Press Enter to continue...")
-        else:
-            print("\nStatus: It's your turn to make a move. Enter your command.")
 
     def find_moves(self):
         # Returns the indices of tiles in the current player's supply that can be legally played this turn
@@ -90,9 +88,15 @@ class Dominoes:
 
         return moves
 
+    def update_freq_dict(self, num1, num2):
+        self.freq_dict[num1] = self.freq_dict[num1] + 1
+        self.freq_dict[num2] = self.freq_dict[num2] + 1
+
     def player_turn(self):
         action = ""
         possible_moves = self.find_moves()
+
+        print("\nStatus: It's your turn to make a move. Enter your command.")
 
         while action == "":
             try:
@@ -117,6 +121,8 @@ class Dominoes:
             else:
                 self.snake.insert(0, curr_tile[::-1])
 
+            self.update_freq_dict(curr_tile[0], curr_tile[1])
+
         elif action > 0:
             curr_tile = self.player.pop(action - 1)
 
@@ -126,6 +132,8 @@ class Dominoes:
             else:
                 self.snake.append(curr_tile[::-1])
 
+            self.update_freq_dict(curr_tile[0], curr_tile[1])
+
         else:
             # If the user inputs 0, remove a random tile from the stock and add it to their supply (if stock isn't empty)
             if self.stock:
@@ -134,32 +142,64 @@ class Dominoes:
 
         self.curr_player = "computer"
 
-    def computer_turn(self):
+    def create_comp_freq_dict(self):
+        # Create a frequency dictionary for computer tiles then combine it with the snake frequency dictionary
+        comp_dict = {}
+        comp_and_snake_tiles = []
+
+        for tile in self.computer:
+            comp_and_snake_tiles.append(tile[0])
+            comp_and_snake_tiles.append(tile[1])
+
+        for i in range(7):
+            comp_dict[i] = comp_and_snake_tiles.count(i)
+
+        return Counter(comp_dict) + self.freq_dict
+
+    def ai_computer_turn(self):
+        print("\nStatus: Computer is about to make a move. Press Enter to continue...")
         input()
 
+        freq_dict = self.create_comp_freq_dict()
+
+        scores = []
+        for tile in self.computer:
+            scores.append(freq_dict[tile[0]] + freq_dict[tile[1]])
+        # Make the score indexes match the tile numbers used in list returned by find_moves
+        scores.insert(0, 0)
+
+        move_found = False
         possible_moves = self.find_moves()
 
         if possible_moves:
-            action = possible_moves[randint(0, len(possible_moves) - 1)]
+            while not move_found and scores.count(0) != len(self.computer):
+                max_tile = scores.index(max(scores))
 
-            if action < 0:
-                action = abs(action)
-                curr_tile = self.computer.pop(action - 1)
+                if max_tile in possible_moves:
+                    move_found = True
+                    curr_tile = self.computer.pop(max_tile - 1)
 
-                if curr_tile[1] == self.snake[0][0]:
-                    self.snake.insert(0, curr_tile)
+                    if curr_tile[0] == self.snake[-1][1]:
+                        self.snake.append(curr_tile)
 
-                else:
-                    self.snake.insert(0, curr_tile[::-1])
+                    else:
+                        self.snake.append(curr_tile[::-1])
 
-            elif action > 0:
-                curr_tile = self.computer.pop(action - 1)
+                    self.update_freq_dict(curr_tile[0], curr_tile[1])
 
-                if curr_tile[0] == self.snake[-1][1]:
-                    self.snake.append(curr_tile)
+                elif max_tile * -1 in possible_moves:
+                    move_found = True
+                    curr_tile = self.computer.pop(max_tile - 1)
 
-                else:
-                    self.snake.append(curr_tile[::-1])
+                    if curr_tile[1] == self.snake[0][0]:
+                        self.snake.insert(0, curr_tile)
+
+                    else:
+                        self.snake.insert(0, curr_tile[::-1])
+
+                    self.update_freq_dict(curr_tile[0], curr_tile[1])
+
+                scores[max_tile] = 0
 
         else:
             if self.stock:
@@ -169,12 +209,18 @@ class Dominoes:
         self.curr_player = "player"
 
     def find_winner(self):
-        if self.matching_ends > 7:
-            return "draw"
-        elif not self.computer:
+        snake_head = self.snake[0][0]
+
+        if not self.computer:
             return "computer"
+
         elif not self.player:
             return "player"
+
+        # A draw occurs if the number at the head and tail of the snake match and that number is in the snake 8 times
+        elif snake_head == self.snake[-1][1] and self.freq_dict[snake_head] >= 8:
+            return "draw"
+
         else:
             return ""
 
@@ -185,7 +231,7 @@ class Dominoes:
             self.print_status()
 
             if self.curr_player == "computer":
-                self.computer_turn()
+                self.ai_computer_turn()
             else:
                 self.player_turn()
 
